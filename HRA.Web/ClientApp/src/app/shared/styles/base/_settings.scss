@@ -1,0 +1,212 @@
+// styleguide:ignore:start
+
+/**
+ * Created by jcammisuli on 2016-01-29.
+ */
+
+@import 'mixins';
+@import 'colors';
+
+/* Used for grids and margins */
+
+$small-size: 4 !default;
+$large-size: 12 !default;
+$small-square: rem-calc($small-size) !default;
+$large-square: rem-calc($large-size) !default;
+$transparent-gray: transparentize(hra-color($grey, 40), 0.8);
+$transparent-white: transparentize($white, 0.6);
+$animation-timing: 0.25s;
+$rad-grad: radial-gradient(ellipse at center, transparentize(hra-color($grey), 0.5) 80%, transparentize($black, 0.5) 100%);
+$linear-grad: rgba($black, 0.7);
+
+$scroll-bar-width: $small-square * 2;
+$scroll-bar-width-firefox: rem-calc(17);
+$scroll-bar-width-edge: rem-calc(17);
+$scroll-bar-width-ie: rem-calc(17);
+
+/*
+  font sizes
+ */
+$icon-font-size-small: $small-square * 3 !default; // 12px
+$icon-font-size-medium: $small-square * 4 !default; // 16px
+$icon-font-size-regular: $small-square * 5 !default; // 20px
+$icon-font-size-large: $small-square * 6; // 24px
+$icon-font-size-x-large: $small-square * 7; // 28px
+$icon-font-size-placeholder: $large-square * 7;
+$font-size: $icon-font-size-medium !default; // 13px
+$font-size-medium: $icon-font-size-medium; //16px
+$font-size-large: $icon-font-size-regular;
+$font-size-x-large: $icon-font-size-x-large;
+$font-size-header: 14px;
+
+
+$font-weight-light: 300; // Source Sans Pro Light
+$font-weight-regular: 400; // Source Sans Pro Light
+$font-weight-semi-bold: 600; // Source Sans Pro Semi Bold
+$font-weight-bold: 700; // Source Sans Pro Bold
+
+
+
+/*
+ * Header size
+ */
+
+$header-height: rem-calc(52) !default;
+$header-text-height: $small-square * 8 !default; //32px
+$sub-nav-height: 0rem !default; // 0px
+$search-bar-height: $small-square * 15 !default;
+//$pagination-height: $small-square * 25 !default;
+$charts-height: $small-square * 74 !default;
+$main-header-height: $header-height+$sub-nav-height !default;
+$virtual-group-indicator-height: $small-square * 7;
+$header-side-margin: rem-calc(24);
+
+/*
+ * Device Group settings
+ */
+
+$device-group-padding-left: $small-square * 6;
+$device-group-items-height: $small-square * 9;
+$device-group-width: $large-square * 28;
+$device-group-min-width: $small-square * 55;
+$device-group-max-width: $small-square * 140;
+$device-group-margin-top: $search-bar-height;
+$device-group-button-width: $large-square * 21;
+$device-group-button-height: $small-square * 11;
+$device-group-button-border: 1px solid hra-color($grey, 20);
+
+/*
+ * Border settings
+ */
+
+$border-base: 1px solid rgb(204, 204, 204);
+$border-radius-small: 3px;
+$border-radius-base: 4px;
+$border-radius-large: 6px;
+
+/*
+ * Shadows go by level
+ */
+
+$shadow: 0 3px 9px rgba(0, 0, 0, .5);
+$shadow-1: 0 1px 1px rgba(0, 0, 0, 0.5);
+$shadow-small: 0 1px 6px rgba(0, 0, 0, 0.24);
+$shadow-header: 0px 1px 13px 2px rgba($black, 0.16);
+$shadow-search-header: 8px 1px 13px 2px rgba($black, 0.16);
+$shadow-light: 1px 1px 6px rgba(0, 0, 0, 0.1);
+$shadow-light-bottom-only: 0px 1px 8px rgba($black, 0.13);
+$shadow-above: 0 -1px 13px 2px rgba($black, 0.16);
+$shadow-above-left: -6px 0px 13px 2px rgba($black, 0.16);
+$shadow-below: 0px 9px 8px -5px rgba(158, 158, 158, 0.25);
+$shadow-dropdown: 0 1px 13px rgba($black, 0.16);
+$shadow-dialog: 0 8px 20px 6px rgba($black, 0.6);
+$shadow-dialog-suffix: 0px 16px 20px 3px rgba($black, 0.6);
+$shadow-layout: 6px 0px 9px 0px rgba($black, 0.2);
+$shadow-saved-searches: 4px 4px 8px -2px rgba(67,70,74,.13);
+$shadow-chart-card: 0 6px 16px rgba(20,30,37,0.08);
+$shadow-config-card: 0 0 24px 0 rgba(20,30,37,0.1);
+
+/*
+ * Padding settings
+ */
+
+$body-padding: $large-square * 2;
+$padding-small: $large-square;
+$base-padding: $small-square * 4; // 16px
+$half-base-padding: $base-padding / 2;
+$modal-padding: $base-padding;
+$layout-padding: ($base-padding * 2) ($body-padding * 2) ($base-padding * 2) ($body-padding * 2);
+$padding-base-vertical: 6px;
+$padding-base-horizontal: $small-square * 3;
+$padding-large-vertical: 10px;
+$padding-large-horizontal:  $small-square * 4;
+$padding-medium-vertical: 14px;
+$padding-small-vertical: 5px;
+$padding-small-horizontal: 10px;
+
+/*
+ * Inputs
+ */
+$input-padding: $small-square $small-square * 2;
+$input-height: $small-square * 8;
+
+/*
+ * ToolTips
+ */
+
+// Tooltips
+$tooltip-max-width: 250px !default;
+$tooltip-background-color: rgba(0, 0, 0, 0.8) !default;
+$tooltip-text-color: #fff !default;
+$tooltip-delay: 0.4s !default;
+$tooltip-duration: 0.1s !default;
+
+/*
+ * Action bar sizes
+ */
+
+$device-action-bar-height: $large-square * 5;
+$count-container-padding: ($large-square * 2) ($small-square * 4) ($large-square * 2) ($small-square * 4);
+
+/**
+*  Device grid sizes
+*/
+
+$row-above-grid-height: $small-square * 14;
+$check-cell-padding: 0 0 0 $small-square*2;
+$device-grid-min-height: $small-square * 71;
+
+/*
+ * Focus border
+ */
+
+$hra-focus-outline: 2px solid hra-color($cyan);
+
+/*
+ * Border
+ */
+
+$hra-border: 1px solid hra-color($grey, 20);
+$hra-border-error: 1px solid hra-color($red);
+$hra-border-input-disabled: 1px solid hra-color($grey, 40);
+
+
+/*
+ * Pop-up
+*/
+$hra-popup-beak-size: $small-square*3;
+$hra-popup-beak-bottom-center: calc(50% - (1.25rem / 2));
+$pop-up-footer-height: $large-square * 5;
+$pop-up-title-height: $small-square * 13;
+$pop-up-title-major-height: $small-square * 14;
+// styleguide:ignore:end
+
+/*
+* Status Notification
+*/
+$hra-status-notification-width: $small-square * 83;
+$hra-status-notification-top: $small-square * 14;
+$hra-status-notification-bottom: $small-square * 15;
+
+
+/*
+  Round button sizes
+ */
+ $round-small: $small-square * 7;
+ $round-medium: $small-square * 8;
+ $round-large: $small-square * 9;
+
+/*
+ * Image Icon Sizes
+ */
+
+$img-icon-size-small: $small-square * 8;
+$img-icon-size-medium: $small-square * 10;
+
+
+$bezier: cubic-bezier(0.4, 0, 0.2, 1);
+
+
+/** Modal sizes **/
+$modal-title-height: rem-calc(52);
+$modal-footer-height: rem-calc(60);

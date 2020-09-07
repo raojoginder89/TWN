@@ -1,0 +1,92 @@
+//  Author: Rafal Bromirski
+//  www: http://rafalbromirski.com/
+//  github: http://github.com/paranoida/sass-mediaqueries
+//
+//  Licensed under a MIT License
+//
+//  Version:
+//  1.6.1
+// --- generator ---------------------------------------------------------------
+@mixin mq($args...) {
+  $media-type: 'only screen';
+  $media-type-key: 'media-type';
+  $args: keywords($args);
+  $expr: '';
+  @if map-has-key($args, $media-type-key) {
+    $media-type: map-get($args, $media-type-key);
+    $args: map-remove($args, $media-type-key);
+  }
+  @each $key,
+  $value in $args {
+    @if $value {
+      $expr: "#{$expr} and (#{$key}: #{$value})";
+    }
+  }
+  @media #{$media-type} #{$expr} {
+    @content;
+  }
+}
+
+
+/*
+High DPI screens (retina macbooks, highresolution laptops, etc)
+*/
+
+@mixin hdpi($ratio: 1.3) {
+  @media only screen and (-webkit-min-device-pixel-ratio: $ratio), only screen and (min-resolution: #{round($ratio*96)}dpi) {
+    @content;
+  }
+}
+
+// $orientation: landscape | portrait
+@mixin tablet($orientation: false) {
+  $min: 268px;
+  $max: 1024px;
+  @include mq( $min-width: $min, $max-width: $max, $orientation: $orientation) {
+    @content;
+  }
+}
+
+// small desktop - 1025 <-> 1280
+@mixin small-desktop() {
+  $min: 1025px;
+  $max: 1280px;
+  @include mq( $min-width: $min, $max-width: $max) {
+    @content;
+  }
+}
+
+// medium desktop - 1281 <-> 1440
+@mixin medium-desktop() {
+  $min: 1281px;
+  $max: 1440px;
+  @include mq( $min-width: $min, $max-width: $max) {
+    @content;
+  }
+}
+
+// large desktop - 1441 <-> 1600
+@mixin large-desktop() {
+  $min: 1441px;
+  $max: 1600px;
+  @include mq( $min-width: $min, $max-width: $max) {
+    @content;
+  }
+}
+
+// xlarge desktop - 1601 -> infinity
+@mixin xlarge-desktop() {
+  $min: 1601px;
+  @include mq( $min-width: $min) {
+    @content;
+  }
+}
+
+// desktop overlay
+@mixin desktop-overlay() {
+    $min: 268px;
+    $max: 926px;
+    @include mq( $min-width: $min, $max-width: $max) {
+        @content;
+    }
+}

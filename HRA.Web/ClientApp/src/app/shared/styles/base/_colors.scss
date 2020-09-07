@@ -1,0 +1,174 @@
+/*
+COMMON COLOR NAMES
+
+These colors are mapped to the names from the official colors.
+Instead of having names like `crush` or `blaze`, developers will use their common, non-marketized name.
+eg. $red: crush
+    $orange: blaze
+
+Then, use the `hra-color` function to get the color
+eg. color: hra-color($red)
+*/
+
+$theme-green: #dfd269;
+$blue: blue;
+$cyan: cyan;
+$grey: grey;
+$red: crush;
+$orange: blaze;
+$yellow: sunset, 60;
+$green: seafoam;
+$light-green: seaweed;
+$dark-green: marine;
+$brown: brown;
+$purple: purple;
+$sunset: sunset;
+$pink: pink;
+
+$newgrey: newgrey;
+$newblue: newblue;
+$newcyan: newcyan;
+// **********************************************************************
+// hma's Colour Palette
+// **********************************************************************
+$colors: (
+    blue: (5: #f3fbfe, 10: #e2f4fb, 20: #bae5f5, 40: #71c8f1, 60: #32b6e9, 80: #0099d3, 100: #0074aa, 120: #064c7c),
+    crush: (5: #fff7f6, 10: #fef0ed, 20: #fddfdc, 40: #fac1ba, 60: #f48272, 80: #f1614f, 100: #e32722, 110:#c13f2b, 120: #a71e22),
+    cyan: (5: #f2f9f9, 10: #e6f4f4, 20: #cceaea, 40: #9ad7d6, 60: #68c5c4, 80: #36b1b0, 100: #029f9d, 120: #026f6f),
+    blaze: (5: #fff7f3, 10: #fff1e9, 20: #fce1d3, 40: #fcc5a7, 60: #f7a77b, 80: #f6894d, 100: #f26b21, 120: #b73e25),
+    grey: (5: #fafbfb, 10: #eceff0, 20: #e4e7e9, 40: #a8b2b7, 60: #828d93, 80: #5B6670, 100: #3d464d, 120: #141e25),
+    seafoam: (5: #eff9f8, 10: #e4f7f3, 20: #cfede8, 40: #a5eadb, 60: #61d6b8, 80: #2fd2a8, 100: #1ead8a, 120: #0b705d),
+    seaweed: (5: #f8fbf6, 10: #f2f8ed, 20: #e3f0d9, 40: #cbe4b5, 60: #b0d78e, 80: #95cb6a, 100: #7ac142, 120: #499142),
+    marine: (5: #f7f9f3, 10: #f1f4e8, 20: #e4ead2, 40: #cbd9a7, 60: #bfdb85, 80: #aed255, 100: #7aa13e, 120: #4c7336),
+    pebble: (5: #fbfcfc, 10: #f5f6f6, 20: #e9e8e9, 40: #d5d4d5, 60: #aaaaab, 80: #7c7c81, 100: #545355, 120: #28272b),
+    sunset: (5: #fffdee, 10: #fffbdb, 20: #fdf7b4, 40: #fff57e, 60: #fff100, 80: #fbad1c, 100: #f47f1f, 120: #c95428),
+    brown: (5: #f7f4f2, 10: #eae4e1, 20: #d8cecb, 40: #baaba5, 60: #96837c, 80: #775d53, 100: #59382c, 120: #2f180d),
+    purple: (5: #f2eff7, 10: #e8dfef, 20: #d7c9e3, 40: #c1aed5, 60: #a085be, 80: #7b61aa, 100: #664fa1, 120: #422e85),
+    pink: (5: #fef4f8, 10: #fce7ef, 20: #fadae1, 40: #f4a2c2, 60: #ed73a4, 80: #e94586, 100: #e31567, 120: #ab1d41),
+
+    // New UI Kit colors - new prefix will be removed once the migration is completed
+    // It also makes sure that color variables are used
+    newgrey: (5: #fcfcfc, 10: #f7f7f7, 20: #f2f2f2, 40: #e9e9e9, 50: #c7c7c7, 60: #a9a9a9, 70: #808080, 80: #6b6b6b,100: #4b4b4b,120:#292929),
+    newblue: (5: #f0f6fa, 10: #e2eef5, 20: #b8d5e7, 40: #8ebbd7, 50: #69a1c7, 55: #4f8fbd, 65: #387eb3, 70: #2f72a8, 80: #256297, 100: #1d5285, 120: #103766),
+    newcyan: (5: #f0f6fa, 10: #e2eef5, 20: #b8d5e7, 40: #8ebbd7, 50: #69a1c7, 55: #4f8fbd, 65: #387eb3, 100: #2f72a8, 120: #256297, 140: #1d5285, 160: #103766),
+);
+
+@function hra-color($color, $value: 100) {
+    $selectedColor: $color;
+
+    @if (type-of($color) == 'list') {
+        $selectedColor: nth($color, 1);
+        $value: nth($color, 2);
+    }
+
+    $color-map: map-get($colors, $selectedColor);
+    @if ($color-map == null) {
+        @error $selectedColor + ' is not part of the color palette';
+    }
+    @return map-get($color-map, $value);
+}
+
+$black: hra-color($grey, 120);
+$white: rgb(255, 255, 255);
+$color-gray-transparent: transparentize(hra-color($grey), 0.8);
+$hover-color: hra-color($grey, 20);
+
+
+/* **** */
+$success-color: hra-color($green);
+$warning-color: hra-color($yellow);
+$alert-color: hra-color($red);
+$color-invalid: hra-color($red);
+$disabled-color: hra-color($grey, 10);
+$disabled-border: hra-color($grey, 40);
+$color-hra-anchor: hra-color($blue);
+$disabled-fore-color: hra-color($grey, 40);
+
+/* * Charts Colors */
+$stacked-tooltip-circle-bg: #3f4042;
+$chart-tooltip-circle: #ff894c;
+$donut-count: #ff6b57;
+
+/* info text background */
+$info-background: #fffde6;
+
+
+/* Use following classes for aesthetics only - New UI KIT */
+// Standardise variables should be used instead of direct colors
+/* Color Mapping*/
+$primary-background:hra-color($newblue, 70);
+$primary-hover-background:hra-color($newblue, 100);
+$primary-text:$white;
+
+$delete-background: hra-color($red, 110);
+
+$secondary-text:hra-color($newblue, 55);
+$secondary-background:$white;
+$secondary-hover-background:hra-color($newblue, 5);
+$secondary-disabled-background:hra-color($newgrey, 50);
+$secondary-active-background:$secondary-text;
+
+$flat-color: hra-color($newgrey, 80);
+$flat-hover: hra-color($newgrey, 100);
+$flat-disabled: hra-color($newgrey, 70);
+
+$action-hover-background: hra-color($newblue, 80);
+$action-disabled: hra-color($newgrey, 55);
+$action-background:hra-color($newblue, 50);
+/*ends*/
+
+$button-primary-text-color: $white;
+$button-primary-background-color: $primary-background;
+$button-primary-hover-background-color:$primary-hover-background;
+$button-primary-disabled-background-color: $secondary-disabled-background;
+$button-delete-background-color: $delete-background;
+$button-primary-disabled-border-color: $secondary-disabled-background;
+
+// Secondary buttons and secondary action buttons share colors 
+$button-secondary-border-color: $secondary-text;
+$button-secondary-text-color: $secondary-text;
+$button-secondary-background-color: $white;
+$button-secondary-hover-background-color: $secondary-hover-background;
+$button-secondary-hover-text-color: $secondary-hover-background;
+$button-secondary-disabled-color: $white;
+$button-secondary-disabled-background-color: $secondary-disabled-background;
+$button-secondary-active-background-color: $secondary-text;
+
+$button-flat-background-color: transparent;
+$button-flat-color: $flat-color;
+$button-flat-hover-color:$flat-hover;
+$button-flat-disabled-color: $flat-disabled;
+
+$button-action-background-color: $action-background;
+$button-action-text-color: $white;
+$button-action-hover-background-color: $action-hover-background;
+$button-action-hover-text-color: $white;
+$button-action-disabled-background-color: $secondary-disabled-background;
+$button-action-disabled-text-color: $white;
+$button-action-delete-background-color:$delete-background;
+
+$button-action-secondary-color: $secondary-text;
+$button-action-secondary-disabled-color: $action-disabled;
+$button-action-secondary-background-color: transparent;
+$button-action-secondary-hover-background-color: $secondary-hover-background;
+$button-action-secondary-disabled-background-color: $secondary-disabled-background;
+
+$unselected-choice-color: $secondary-disabled-background;
+$selected-choice-color: $secondary-text;
+
+$radio-label-color: $secondary-disabled-background;
+$toggle-on-background-color: $secondary-text;
+$toggle-of-background-color: $secondary-disabled-background;
+$toggle-head-color: $white;
+
+$input-text-label-color: hra-color($newgrey, 120);
+$input-text-border-color: hra-color($newgrey, 40);
+$input-text-placeholder-color: hra-color($newgrey, 60);
+$input-text-active-border-color: hra-color($newgrey, 80);
+$input-text-active-text-color: hra-color($newgrey, 120);
+$input-text-error-border-color: hra-color($red, 110);
+$input-text-disabled-border-color: hra-color($newgrey, 50);
+$input-text-error-message-color: $input-text-error-border-color;
+$input-text-disabled-color: $input-text-placeholder-color;
+$input-text-label-disabled-color: $input-text-border-color;
+$input-text-disabled-background-color: $input-text-placeholder-color;

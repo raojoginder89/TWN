@@ -1,0 +1,29 @@
+@import '../../../styles/base/settings';
+
+:host([light]) {
+  color:$white;
+}
+
+
+:host([center]) {
+ text-align: center;
+}
+
+.links {
+  font-weight: $font-weight-semi-bold;
+  text-transform: uppercase;
+  a {
+    margin-right: $small-square * 2;
+    text-decoration: none;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  margin-bottom: $small-square * 2;
+}
+
+.copyright {
+  font-weight: $font-weight-semi-bold;
+  color: #000;//$theme-green;
+}

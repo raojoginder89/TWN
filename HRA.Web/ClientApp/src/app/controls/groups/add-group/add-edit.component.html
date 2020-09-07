@@ -1,0 +1,64 @@
+<div class="card m-3">
+    <h5 class="card-header" *ngIf='!groupId'>Add Group</h5>
+    <h5 class="card-header" *ngIf='groupId'>Edit Group</h5>
+    <div class="card-body">
+        <form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" formControlName="name" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                    <div *ngIf="f.name.errors.required">Name is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" formControlName="email" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.required">Email is required</div>
+                    <div *ngIf="f.email.errors.email">Invalid email</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="text" formControlName="phoneNumber" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }" />
+                <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
+                    <div *ngIf="f.phoneNumber.errors.required">Phone Number is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="contactPerson">Contact Person</label>
+                <input type="text" formControlName="contactPerson" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.contactPerson.errors }" />
+                <div *ngIf="submitted && f.contactPerson.errors" class="invalid-feedback">
+                    <div *ngIf="f.contactPerson.errors.required">Contact Person is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" formControlName="address" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.address.errors }" />
+                <div *ngIf="submitted && f.address.errors" class="invalid-feedback">                  
+                    <div *ngIf="f.address.errors.required">Address is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="webSiteUrl">Web Site</label>
+                <input type="text" formControlName="webSiteUrl" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.webSiteUrl.errors }" />
+                <div *ngIf="submitted && f.webSiteUrl.errors" class="invalid-feedback">                  
+                    <div *ngIf="f.webSiteUrl.errors.required">Web Site is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button [disabled]="loading" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    <span *ngIf='!groupId'>Add</span>
+                    <span *ngIf='groupId'>Update</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

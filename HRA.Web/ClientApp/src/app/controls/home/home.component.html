@@ -1,0 +1,60 @@
+<!-- <app-dynamic-form [questions]="questions$ | async"></app-dynamic-form> -->
+<div class="container">
+  <div class="container-fluid pb-video-container">
+    <div>
+      <div *ngIf='!playVideo'>
+
+        <div class="skinsSection">
+          <ul class="skinsList">
+            <li class="skinsList-item" *ngFor="let video of videos">
+              <div class="wrap">
+                <div>
+                  <div>
+                    <i *ngIf='video.status === 3' class="fa fa-check-circle completedStatus"></i>
+                    <img *ngIf='video.videoThumnail' [src]='video.videoThumnail'
+                      style="width: inherit; max-width: 224px;" [alt]='video.title'> <i></i></div>
+                </div>
+                <div class="details">
+                  <h4 class="title">{{video.title}}</h4>
+                  <div class="descr ellipses">{{video.description }}</div>
+                  <div class="descr completedOn">
+                    Duration: {{ video.duration }}
+                  </div>
+                  <div class="descr completedOn">
+                    Uploaded On: {{getDate(video.completedOn) | date: 'medium'}}
+                  </div>
+                  <div class="descr completedOn" *ngIf='video.status === 3'> 
+                    <!-- <i *ngIf='video.status === 3' class="fa fa-check-circle" style="color: green;"></i> -->
+                    Completed On: {{getDate(video.completedOn)|date: 'medium'}}
+                  </div>
+                  <div class="play-button" (click)="playthisVideo(video)"> </div>
+                  <!-- <a href="#" class="round-button" (click)="playthisVideo(video)">
+                  <i class="fa fa-play fa-1x"></i>
+                </a> -->
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!-- <div class="col-md-3 pb-video" *ngFor="let video of videos" (click)="playthisVideo(video)">
+        <img *ngIf='video.videoThumnail' [src]='video.videoThumnail' style="width: inherit; max-width: 300px;">
+        <label class="form-control label-warning text-center">
+          <i *ngIf='video.status === 3' class="fa fa-check-circle" style="color: green;"></i>
+          {{video.title}}</label>
+      </div> -->
+      </div>
+      <div *ngIf='playVideo'>
+        <div class="row">
+          <button class="btn btn-default" (click)="showList()">
+            <i class="fa fa-arrow-left fa-lg"></i>
+          </button>
+        </div>
+        <div class="row">
+          <app-vimeo-player [videoDetails]=" currentSelectedVideo" (videoCompletedEvent)="videoCompleted()"
+            (showVideoGallary)='showList($event)'>
+          </app-vimeo-player>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

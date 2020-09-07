@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="player text-center">
+        <h5>{{ title }}</h5>
+        <div id="vimeoPlayer" style="min-height: 360px;"></div>
+        <!-- <iframe id="intro_explanimation" [src]="videoURL | vimeoUrl" width="640" height="360" frameborder="0"
+            allowfullscreen allow="autoplay; encrypted-media">
+        </iframe> -->
+        <div data-vimeo-url="videoURL | vimeoUrl" id="intro_explanimation1"></div>
+        <button type="button" [ngClass]="{'btn-sucess': state ==='play' || state==='resume'}" class="btn"
+            (click)='buttonPlayPress()'>
+            <i [ngClass]="{'fa-pause': state ==='play' || state ==='resume', 'fa-play': state ==='pause' || state ==='stop'}"
+                class="fa"></i>
+        </button>
+        <button type="button" class="btn" (click)='buttonStopPress()'>
+            <i class="fa fa-stop"></i>
+        </button>
+        <button type="button" class="btn" (click)='buttonMutePress()'>
+            <i [ngClass]="{'fa-volume-off': isMuted, 'fa-volume-up': !isMuted}" class="fa"></i>
+        </button>
+        <button type="button" class="btn" (click)='buttonFullScreenPress()'>
+            <i class="fa fa-arrows-alt"></i>
+        </button>
+        <div class="volume">
+            <input type="range" #volume min="0" max="1" step="0.1" value="1" (change)='setVolume(volume.value)' />
+        </div>
+    </div>
+</div>

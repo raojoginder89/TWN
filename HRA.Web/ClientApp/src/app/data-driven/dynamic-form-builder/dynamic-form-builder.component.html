@@ -1,0 +1,29 @@
+<div [formGroup]="form">
+    {{question.key}}
+    <label [attr.for]="question.key">{{question.label}}</label>
+
+    <div [ngSwitch]="question.controlType">
+
+        <input *ngSwitchCase="'textbox'" [formControlName]="question.key" [id]="question.key" [type]="question.type">
+
+        <select [id]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key">
+            <option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</option>
+        </select>
+
+        <div  *ngSwitchCase="'array'">
+            <div *ngFor="let question1 of question.value" class="form-row">
+                <app-dynamic-form-builder [question]="question1" [form]="form"></app-dynamic-form-builder>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="errorMessage" *ngIf="!isValid">{{question.label}} is required
+        <li style="color: red" *ngFor="let error of listOfErrors()">{{error}}</li>
+    </div>
+
+    <ul *ngIf="shouldShowErrors()">
+
+    </ul>
+
+</div>

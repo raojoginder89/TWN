@@ -1,0 +1,61 @@
+@import '../../../../shared/styles/base/settings';
+
+$button-height: $small-square * 8;
+$button-width: $large-square * 10;
+
+:host {
+  width: 100%;
+  padding-top: $small-square * 55;
+  display: block;
+}
+
+:host /deep/ h1 {
+  color: hra-color($grey, 80);
+  font-size: $large-square * 4;
+  line-height: $large-square * 4;
+  margin-top: $large-square;
+}
+
+:host /deep/ p {
+  font-size: $font-size-medium;
+  line-height: $small-square * 7;
+  margin-top: $large-square;
+  margin-bottom: $small-square;
+}
+
+:host /deep/ .form-error {
+  color: hra-color($red);
+}
+
+:host /deep/ form {
+  display: inline-block;
+  width: 100%;
+  margin-top: $large-square * 2;
+  .form-group {
+    // override the default form-group style
+    margin-top: 0 !important;
+  }
+  .form-footer {
+    display: flex;
+    justify-content: space-between;
+    .left, .right {
+      display: inline-flex;
+      flex-flow: column nowrap;
+    }
+    .left {
+      line-height: $button-height;
+      font-size: $font-size-header;
+    }
+    .right {
+      display: inline-flex;
+      margin-left: auto;
+    }
+  }
+}
+
+/** Used to wrap a button so that the loader stays in the same space as the button **/
+
+:host /deep/ a {
+  color: hra-color($blue);
+  cursor: pointer;
+}

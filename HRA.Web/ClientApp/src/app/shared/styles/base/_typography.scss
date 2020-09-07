@@ -1,0 +1,222 @@
+@import 'settings';
+@import 'mixins';
+@import 'colors';
+
+// Typography
+//
+// This is hra's Typography.
+//
+// Styleguide 2.0
+
+$global-font-size: 100%;
+$global-lineheight: 1.5;
+$global-weight-bold: 700 !default;
+$global-weight-normal: normal;
+
+$body-font-family: 'Source Sans Pro', 'Open Sans', sans-serif;
+
+$paragraph-lineheight: 1rem !default;
+$paragraph-margin-bottom: 0.2rem !default;
+$paragraph-text-rendering: optimizeLegibility !default;
+
+$small-font-size: 80% !default;
+$large-font-size: 120%;
+
+$header-font-family: $body-font-family;
+$header-font-weight: $global-weight-normal;
+$header-font-style: normal;
+$header-color: inherit;
+$header-text-rendering: optimizeLegibility;
+$header-margin-bottom: 0.5rem;
+$header-lineheight: 1.4;
+$header-small-font-color: hra-color($grey, 40);
+/// Sizes of headings at various screen sizes. Each key is a breakpoint, and each value is a map of heading sizes.
+/// @type Map
+$header-sizes: (
+        'h1': 34,
+        'h2': 25,
+        'h3': 19,
+        'h4': 18,
+        'h5': 17,
+        'h6': 16,
+) !default;
+
+html {
+  font-size: $global-font-size;
+  font-family: $body-font-family;
+  color: $black;
+}
+
+:lang(ja) {
+  font-family: "メイリオ", Meiryo, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "MS Pゴシック", MS P Gothic, Verdana, sans-serif;
+}
+
+body{
+font-size: $font-size;
+}
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+p,
+blockquote,
+th,
+td {
+  margin: 0;
+  padding: 0;
+}
+// Typography Utilities
+//
+// These are the basic typography utilities
+//
+// markup:
+//  <i>hra manages your whole mobile enterprise, devices, apps, content and security.</i><br><br>
+//  <b>hra manages your whole mobile enterprise, devices, apps, content and security.</b><br><br>
+//  <small>hra manages your whole mobile enterprise, devices, apps, content and security.</small><br><br>
+//  <p>hra manages your whole mobile enterprise, devices, apps, content and security.</p><br><br>
+//
+// Styleguide 2.1
+p {
+  line-height: $paragraph-lineheight;
+  margin-bottom: $paragraph-margin-bottom;
+  text-rendering: $paragraph-text-rendering;
+}
+
+// Emphasized text
+em,
+i {
+  font-style: italic;
+  line-height: inherit;
+}
+
+// Strong text
+strong,
+b {
+  font-weight: $global-weight-bold;
+  line-height: inherit;
+}
+// <link rel="stylesheet" href="get-resource/shared/styles/fonts/font-famc/famc.css">
+// Small text
+small {
+  font-size: $small-font-size;
+  line-height: inherit;
+}
+
+// Header Levels
+//
+// These are the basic header levels
+//
+// markup:
+//  <h1>Header Level 1</h1>
+//  <h2>Header Level 2</h2>
+//  <h3>Header Level 3</h3>
+//  <h4>Header Level 4</h4>
+//  <h5>Header Level 5</h5>
+//  <h6>Header Level 6</h6>
+//
+// Styleguide 2.2
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $header-font-family;
+  font-weight: $header-font-weight;
+  font-style: $header-font-style;
+  color: $header-color;
+  text-rendering: $header-text-rendering;
+  margin-top: 0;
+  margin-bottom: $header-margin-bottom;
+  line-height: $header-lineheight;
+
+  small {
+    color: $header-small-font-color;
+    line-height: 0;
+  }
+}
+
+// Heading sizes
+@each $header, $font-size in $header-sizes {
+  #{$header} {
+    font-size: rem-calc($font-size);
+  }
+}
+
+// Custom hra Icons
+//
+// In addition to the standard font awesome library we also have access to special hra icons
+//
+// markup:
+// <div class="row" style="margin-right: 0;margin-left: 0;">
+//  <div class =" col-sm-6">
+//    <i class="fa famc famc-hra-logo "></i>
+//    <span class="icon-name">.famc-hra-logo</span>
+//  </div>
+//  <div class =" col-sm-6">
+//    <i class="fa famc famc-devices "></i>
+//    <span class="icon-name">.famc-devices</span>
+//  </div>
+// <div class =" col-sm-6">
+//    <i class="fa famc famc-action-un-enroll"></i>
+//    <span class="icon-name">.famc-action-un-enroll</span>
+// </div>
+// <div class ="col-sm-6">
+//    <i class="fa famc famc-action-wipe"></i>
+//    <span class="icon-name">.famc-action-wipe</span>
+// </div>
+// <div class =" col-sm-6">
+//    <i class="fa famc famc-back-to-device-list"></i>
+//    <span class="icon-name">.famc-back-to-device-list</span>
+// </div>
+// <div class =" col-sm-6">
+//    <i class="fa famc famc-check-in"></i>
+//    <span class="icon-name">.famc-check-in</span>
+// </div>
+// <div class ="col-sm-6">
+//    <i class="fa famc famc-close-cross"></i>
+//    <span class="icon-name">.famc-close-cross</span>
+// </div>
+// <div class =" col-sm-6">
+//    <i class="fa famc famc-compliant"></i>
+//    <span class="icon-name">.famc-compliant</span>
+// </div>
+// <div class =" col-sm-6">
+//    <i class="fa famc famc-device-desktop"></i>
+//    <span class="icon-name">.famc-device-desktop</span>
+// </div>
+// <div class =" col-sm-6">
+//    <i class="fa famc famc-device-phone"></i>
+//    <span class="icon-name">.famc-device-phone</span>
+// </div>
+// <div class =" col-sm-6">
+//    <i class="fa famc famc-device-tablet"></i>
+//    <span class="icon-name">.famc-device-tablet</span>
+// </div>
+// <div class ="col-sm-6">
+//    <i class="fa famc famc-exclamation"></i>
+//    <span class="icon-name">.famc-exclamation</span>
+// </div>
+// <div class ="col-sm-6">
+//    <i class="fa famc famc-not-compliant"></i>
+//    <span class="icon-name">.famc-not-compliant</span>
+// </div>
+// <div class =" col-sm-6">
+//    <i class="fa famc famc-three-dots"></i>
+//    <span class="icon-name">.famc-three-dots</span>
+// </div>
+//</div>
+//
+// Styleguide 2.3

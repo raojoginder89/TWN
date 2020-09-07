@@ -1,0 +1,70 @@
+@import '../../styles/base/settings';
+
+:host {
+  background-color: $white;
+  display: flex;
+  height: $input-height;
+  color: hra-color($grey, 40);
+  border-color: hra-color($grey, 20);
+  border-radius: $border-radius-large;
+}
+
+:host([disabled]) {
+  pointer-events: none;
+  background-color: hra-color($grey, 10);
+}
+
+:host(.ng-pristine, .ng-valid) {
+  input:active,
+  input:focus {
+    color: $black;
+    border-color: hra-color($grey);
+    & + label {
+      color: $black;
+      border-color: hra-color($grey);
+    }
+  }
+}
+
+label {
+  margin-bottom: 0;
+  border-top-left-radius: $border-radius-large;
+  border-bottom-left-radius: $border-radius-large;
+  border-top: 1px solid;
+  border-left: 1px solid;
+  border-bottom: 1px solid;
+  border-right: none;
+  border-color: inherit;
+  background-color: inherit;
+  cursor: text;
+  height: 100%;
+}
+
+i {
+  padding-left: $small-square * 4;
+  padding-right: $large-square;
+  font-size: $small-square * 4;
+  align-self: center;
+  height: 100%;
+  order: 1;
+  display: flex;
+  &:before {
+    align-self: center;
+  }
+}
+
+input {
+  border-top-right-radius: $border-radius-large;
+  border-bottom-right-radius: $border-radius-large;
+  border-top: 1px solid;
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+  border-left: none;
+  border-color: inherit;
+  background-color: inherit;
+  color: inherit;
+  flex: 1;
+  order: 2;
+  margin: 0;
+  padding: 0;
+}

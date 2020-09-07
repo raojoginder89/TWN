@@ -1,0 +1,11 @@
+@import "../../../styles/base/settings";
+
+.footer {
+  padding-top: $small-square * 6;
+  font-size: $font-size-medium;
+  hra-copyright {
+    .copyright {
+      text-align: center;
+    }
+  }
+}

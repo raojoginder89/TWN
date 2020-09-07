@@ -1,0 +1,40 @@
+@import "../../shared/styles/base/settings";
+:host {
+  height: 100vh;
+  width: 100vw;
+  display: block;
+}
+
+
+.login-form-title {
+  width: 100%;
+  display: block;
+  font-size: rem-calc(30);
+  color: hma-color($grey, 80);
+  line-height: 1.2;
+  text-align: center;
+}
+
+.btn-login {
+  width: 100%;
+  color: #fff;
+  height: rem-calc(42);
+  background: $theme-green;
+  font-size: rem-calc(18);
+}
+
+.form-link-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: rem-calc(14);
+  a {
+    line-height: 2;
+  }
+  .forget-pass {
+    color: hma-color($grey, 60);
+  }
+  .register-user {
+    color: hma-color(blaze, 80);
+  }
+}

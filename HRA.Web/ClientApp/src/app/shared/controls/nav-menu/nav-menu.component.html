@@ -1,0 +1,51 @@
+<header *ngIf="currentUser">
+  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow">
+    <div class="container">
+      <a class="navbar-brand" [routerLink]="['/']">
+        <div class="logo"></div>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
+        aria-label="Toggle navigation" [attr.aria-expanded]="isExpanded" (click)="toggle()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]="{ show: isExpanded }">
+        <ul class="navbar-nav flex-grow">
+          <!-- <li class="nav-item" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
+          </li> -->
+          <li *ngIf='isAdmin' class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/groups']">Groups</a>
+          </li>
+          <li *ngIf='isAdmin' class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/videos']">Videos</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['a6bab53c-323c-442e-9d86-1e8245125eac/hra-form']">HRA-Form</a>
+          </li>
+          <!-- <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/change-password']">Change Password</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" (click)="logout()">Logout</a>
+          </li>  -->
+          <div class="navbar-nav ml-auto">
+            <div class="nav-item" ngbDropdown>
+              <a id="user-dropdown" class="nav-link text-dark " ngbDropdownToggle>
+                {{ this.currentUser.firstName }} {{ this.currentUser.lastName }} <i class="fa fa-user-circle"></i>
+              </a>
+              <div ngbDropdownMenu aria-labelledby="user-dropdown" class="dropdown-menu dropdown-menu-right">
+                <!-- <h6 class="dropdown-header">
+                  <span translate>Logged in as</span> <b>{{ this.currentUser.firstName }} {{ this.currentUser.lastName }}</b>
+                </h6> -->
+                
+                <a class="nav-link text-dark dropdown-item" [routerLink]="['/change-password']">Change Password</a>
+                <div class="dropdown-divider"></div>
+                <button class="dropdown-item" (click)="logout()" translate>Logout</button>
+              </div>
+            </div>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

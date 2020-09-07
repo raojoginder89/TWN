@@ -1,0 +1,93 @@
+@import "../../../../shared/styles/base/settings";
+
+$right-width: 640px; // flex rem does not work in ie11
+$logo-container-height: $img-icon-size-medium + $small-square * 4;
+$branding-logo-margin: $small-square * 2;
+$right-panel-min-width: $large-square * 53;
+
+:host {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  position: relative;
+  overflow: auto;
+}
+
+@mixin panel {
+  display: inline-flex;
+  height: 100%;
+  width: 100%;
+}
+
+#logo-container {
+  display: inline-flex;
+  flex-shrink: 0;
+  position: relative;
+
+  padding-top: $large-square * 5;
+
+  .logo {
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    z-index: 1;
+    background-size: contain;
+    height: rem-calc(145);
+    width: 60%;
+    margin: 0 auto;
+    background-image: url("../../../../../assets/img/Logo.jpg");
+  }
+}
+
+.left-panel {
+  @include panel();
+  flex: 1 1 0px;
+  min-width: 665px; // need to support ie11
+
+  box-shadow: $shadow-layout;
+  @include tablet() {
+    display: none;
+  }
+
+  @include small-desktop() {
+    min-width: 536px; // need to support ie11
+  }
+}
+
+.right-panel {
+  @include panel();
+  flex: 0 1 $right-width;
+  padding: $layout-padding;
+  flex-flow: column nowrap;
+  overflow-y: auto;
+
+  // deep is used because layout-form is part of ng-content. We use /deep/ to penetrate different contents
+  /deep/ layout-form {
+    max-width: $right-width;
+    margin: 0 auto;
+    padding-top: $large-square * 5;
+  }
+
+  @include tablet() {
+    flex: 1 1 0px;
+    min-width: $right-panel-min-width;
+  }
+}
+
+hra-logo {
+  display: none;
+  @include tablet() {
+    display: inline-block;
+  }
+}
+
+hra-copyright {
+  display: none;
+
+  @include tablet() {
+    padding-top: $small-square * 6;
+    margin-top: auto;
+    display: block;
+  }
+}

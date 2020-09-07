@@ -1,0 +1,302 @@
+@import 'settings';
+@import 'mixins';
+@import 'typography';
+
+.input-text,
+input,
+select {
+    display: inline-block;
+    padding: $input-padding;
+    margin-left: $small-square;
+    margin-bottom: $small-square;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: left;
+    white-space: nowrap; //vertical-align: middle;
+    background-image: none;
+    border: $border-base;
+    border-radius: $border-radius-base;
+    outline: none; // Sizing
+    &.input-sm {
+        padding: $padding-small-vertical $padding-small-horizontal;
+        border-radius: $border-radius-small;
+        font-size: $small-font-size;
+    }
+    &.input-lg {
+        padding: $padding-large-vertical $padding-large-horizontal;
+        border-radius: $border-radius-large;
+        font-size: $large-font-size;
+    }
+}
+
+input {
+    border-radius: 0; // Hackster McHacker - remove stupid yellow color from input fields on webkit browsers
+    &:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0px 1000px $white inset;
+    }
+}
+
+.checkbox,
+.radio {
+    position: relative; // display: block; // this conflict to Bing Maps Web API(Direciton) style
+    margin-top: $large-square / 2;
+    margin-bottom: $large-square / 2;
+    label title {
+        min-height: $global-lineheight;
+        padding-left: $large-square;
+        margin-bottom: 0;
+        font-weight: normal;
+        cursor: pointer;
+    }
+}
+
+.radio input[type='radio'],
+.radio-inline input[type='radio'],
+.checkbox input[type='checkbox'],
+.checkbox-inline input[type='checkbox'] {
+    position: absolute;
+    margin-left: -($large-square);
+    margin-top: $small-square \9;
+}
+
+.radio + .radio,
+.checkbox + .checkbox {
+    margin-top: -5px; // Move up sibling radios or checkboxes for tighter spacing
+}
+
+.radio-inline,
+.checkbox-inline {
+    position: relative;
+    display: inline-block;
+    padding-left: $large-square;
+    margin-bottom: 0;
+    vertical-align: middle;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.radio-inline + .radio-inline,
+.checkbox-inline + .checkbox-inline {
+    margin-top: 0;
+    margin-left: $large-square / 2; // space out consecutive inline controls
+}
+
+.input-invalid {
+    font-weight: 700;
+    color: $input-text-error-message-color;
+}
+
+.input-informational {
+    font-weight: 700;
+    color: $input-text-active-text-color;
+}
+
+.input-group {
+    display: table;
+    .form-control,
+    .input-group-btn {
+        display: table-cell;
+        margin: 0;
+        float: left;
+    }
+    .form-control:first-of-type,
+    button.input-group-btn:first-of-type:not(:last-of-type) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    .form-control:last-of-type:not(:first-of-type),
+    button.input-group-btn:first-of-type {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+}
+
+.select {
+    overflow: hidden;
+    position: relative;
+    display: block;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-right: $small-square * 5;
+}
+
+.select:after {
+    content: '\e920'; //ngui-icon-dropdown
+    transform: rotate(90deg);
+    font-family: 'icomoon';
+    font-size: $large-square;
+    line-height: $small-square * 8;
+    color: $black;
+    position: absolute;
+    right: $small-square;
+    top: 0;
+    z-index: 1;
+    pointer-events: none;
+    box-sizing: border-box;
+}
+
+.input-error-message {
+    height: $small-square * 2;
+    margin-bottom: $large-square * 2;
+}
+
+.error-message-text {
+    color: $input-text-error-message-color;
+    margin: $small-square * 2 0;
+    display: inline-block;
+}
+
+.custom-attribute-renderer-input {
+    border-radius: 3px;
+    width: 100%;
+    margin: 0;
+    height: $small-square * 8;
+    border: $hra-border;
+    position: relative;
+    &.error {
+        border-color: $input-text-error-message-color;
+    }
+}
+
+:not(form).ng-dirty.ng-invalid {
+    // make sure that error colors are always showing
+    border-color: $input-text-error-message-color !important;
+    &::-webkit-input-placeholder,
+    &:-moz-placeholder,
+    &:-ms-input-placeholder {
+        color: $input-text-error-message-color !important;
+    }
+}
+
+input[text][disabled],
+input[password][disabled],
+.form-input[disabled],
+text-area[disabled],
+.form-input-area[disabled],
+[disabled]:not([disabled='false']),
+[disabled='true'],
+[disabled='disabled'] {
+    background-color: $disabled-color !important;
+    cursor: not-allowed !important;
+}
+
+// NOTE: new data-form elements are created and we don"t want to apply global styles to them
+// TODO: this might have to be removed, because new data forms should be used everywhere instead
+modal-body > form,
+div:not([class*='data-form']) > form {
+    $input-height: $small-square * 8;
+    &.disabled {
+        .form-title,
+        .form-title > span {
+            color: hra-color($grey, 40);
+        }
+    }
+    .form-description {
+        margin-bottom: $large-square;
+    }
+    .form-title {
+        text-transform: uppercase;
+        line-height: $small-square * 5;
+        color: hra-color($blue, 120);
+        font-weight: $font-weight-semi-bold;
+    }
+    .form-group {
+        margin-top: $large-square;
+        border-radius: $border-radius-large;
+        label {
+            //text-transform: capitalize;
+            font-weight: 600;
+            margin-bottom: $small-square * 2;
+            display: block;
+            span {
+                display: inline-block;
+                padding-bottom: $small-square * 2;
+            }
+        }
+        input[text],
+        input[password],
+        .form-input,
+        text-area,
+        .form-input-area {
+            margin: 0;
+            width: 100%;
+            height: $input-height;
+            padding: $small-square * 2;
+            border-radius: $border-radius-large;
+            margin-bottom: $small-square;
+            background-color: $white;
+            color: $input-text-active-text-color;
+            border-color: $input-text-active-border-color;
+        }
+        text-area,
+        .form-input-area {
+            height: $large-square * 10;
+            resize: none;
+        }
+        .form-input-error {
+            $error-height: $large-square * 3;
+            color: $input-text-error-message-color;
+            min-height: $error-height;
+            line-height: $error-height;
+            & > * {
+                $error-padding-top: $small-square * 2;
+                height: $error-height - $error-padding-top;
+            }
+        } //TODO: this needs to be removed. This is now a component
+        .input-icon {
+            background-color: $white;
+            display: flex;
+            height: $input-height;
+            color: $input-text-placeholder-color;
+            label {
+                margin-bottom: 0;
+                border-top-left-radius: 3px;
+                border-bottom-left-radius: 3px;
+                border-top: 1px solid hra-color($grey, 20);
+                border-left: 1px solid hra-color($grey, 20);
+                border-bottom: 1px solid hra-color($grey, 20);
+                border-right: none;
+                cursor: text;
+                height: 100%;
+            }
+            i {
+                padding-left: $small-square * 4;
+                padding-right: $large-square;
+                font-size: $small-square * 4;
+                align-self: center;
+                height: 100%;
+                order: 1;
+                display: flex;
+                &:before {
+                    align-self: center;
+                }
+            }
+            input[type='text'],
+            input[type='password'] {
+                border-top-right-radius: 3px;
+                border-bottom-right-radius: 3px;
+                border-top: 1px solid $input-text-disabled-border-color;
+                border-right: 1px solid $input-text-disabled-border-color;
+                border-bottom: 1px solid $input-text-disabled-border-color;
+                border-left: none;
+                flex: 1;
+                order: 2;
+                margin: 0;
+                padding: 0;
+                &:active,
+                &:focus {
+                    color: $black;
+                    border-color: $input-text-active-border-color;
+                    & + label {
+                        color: $black;
+                        border-color: $input-text-active-text-color;
+                    }
+                }
+            }
+        }
+    }
+}

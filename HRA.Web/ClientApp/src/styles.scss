@@ -1,0 +1,68 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Provide sufficient contrast against white background */
+
+@import "../node_modules/ag-grid-community/src/styles/ag-grid.scss";
+@import "../node_modules/ag-grid-community/src/styles/ag-theme-alpine/sass/ag-theme-alpine-mixin.scss";
+@import "../src/app/shared/styles/base/input";
+
+a {
+  color: #0366d6;
+  cursor: pointer;
+}
+
+code {
+  color: #e01a76;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+// .ag-theme-alpine {
+//   @include ag-theme-alpine();
+// }
+
+.ag-theme-alpine {
+  @include ag-theme-alpine(
+    (
+      odd-row-background-color: #cfd8dc,
+    )
+  );
+}
+
+.modal,
+button:focus {
+  outline: none !important;
+}
+
+.modal-footer {
+  box-shadow: 0 8px 20px 6px rgba(20, 30, 37, 0.6);
+}
+
+.modal-body {
+  min-height: 100px;
+}
+
+.modal-header {
+  padding: 0.75rem 1rem;
+  background-color: #064c7c;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 3.25rem;
+}
+
+.close,
+.close:hover {
+  color: #fff;
+  margin-top:-25px!important;
+}
