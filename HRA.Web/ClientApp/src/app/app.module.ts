@@ -36,6 +36,9 @@ import { CommonModule } from '@angular/common';
 import { SharedLayoutModule } from './shared/controls/layout/shared-layout.module';
 import { SharedInputIconModule } from './shared/controls/input-icon';
 import { FooterControl } from './shared/controls/layout/footer/footer.ctrl';
+import { ThankYouComponent } from './controls/ThankYou/thankyou.component';
+import { WelcomeComponent } from './controls/welcome/welcome.component';
+// import { SharedRadioGroupModule } from './shared/controls/radio-group/shared-radio-group.module';
 
 @NgModule({
   declarations: [
@@ -61,7 +64,9 @@ import { FooterControl } from './shared/controls/layout/footer/footer.ctrl';
     VideoListComponent,
     AddEditVideoComponent,
     ModalComponent,
-    FooterControl
+    FooterControl,
+    ThankYouComponent,
+    WelcomeComponent
   ],
   entryComponents: [
     ModalComponent
@@ -76,6 +81,7 @@ import { FooterControl } from './shared/controls/layout/footer/footer.ctrl';
     appRoutingModule,
     SharedLayoutModule,
     SharedInputIconModule,
+    // SharedRadioGroupModule,
     AgGridModule.withComponents([BtnCellRendererComponent])
   ],
   providers: [

@@ -9,6 +9,8 @@ namespace HRA.Common.Models
 
         public int UserId { get; set; }
 
+        public int GroupId { get; set; }
+
         public string Email { get; set; }
 
         public string UserName { get; set; }
@@ -21,7 +23,7 @@ namespace HRA.Common.Models
 
         public bool IsActive { get; set; }
 
-        public DateTime Dob { get; set; }
+        public DateTime? Dob { get; set; }
 
         public string Ssn { get; set; }
 

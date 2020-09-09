@@ -6,7 +6,7 @@ namespace HRA.Common.Interfaces
 {
     public interface IUserService
     {
-        Task<ResultMessage<string>> Register(User user);
+        Task<ResultMessage<UserToken>> Register(User user);
 
         Task<UserToken> Login(string userName, string password);
 

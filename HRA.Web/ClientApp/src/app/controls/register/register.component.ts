@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   loading = false;
   submitted = false;
+  errorMessage: string[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,7 +35,7 @@ export class RegisterComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
       ssn: ['', Validators.required],
-      dob: ['', Validators.required],
+      // dob: ['', Validators.required],
     });
   }
 
@@ -51,20 +52,23 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-
+    this.errorMessage = [];
     this.loading = true;
-    this.userService.register(this.registerForm.value)
+    this.authenticationService.register(this.registerForm.value)
       .pipe(first())
       .subscribe(
         () => {
-          this.alertService.success('Registration successful', true);
-          this.router.navigate(['/login']);
+          // this.alertService.success('Registration successful', true);
+          this.router.navigate(['/']);
         },
         error => {
+          const _this = this;
           if (error.error instanceof Array) {
-            error.error.map(err => this.alertService.error(err.value));
+            error.error.map(err => _this.errorMessage.push(err.value));
+          } else if (typeof error.error === 'string') {
+            this.errorMessage.push(error.error);
           } else {
-            this.alertService.error(error);
+            this.errorMessage.push(error);
           }
           this.loading = false;
         });

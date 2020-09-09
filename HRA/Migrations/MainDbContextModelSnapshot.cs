@@ -213,6 +213,54 @@ namespace HRA.Migrations
                     b.ToTable("HraDetails");
                 });
 
+            modelBuilder.Entity("HRA.DAL.Entity.Member", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ReferenceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NewId()");
+
+                    b.Property<string>("Ssn")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(300)")
+                        .HasMaxLength(300);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Members");
+                });
+
             modelBuilder.Entity("HRA.DAL.Entity.Role", b =>
                 {
                     b.Property<string>("Id")
@@ -239,36 +287,6 @@ namespace HRA.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "ccaeec72-9d3d-4890-af25-d59cf20f27a2",
-                            ConcurrencyStamp = "8651d1ec-4faf-43db-b292-459b377cbe9d",
-                            Name = "SuperAdmin",
-                            NormalizedName = "SUPERADMIN"
-                        },
-                        new
-                        {
-                            Id = "f04717e8-02b3-4b85-ab2f-ea78d0183e6f",
-                            ConcurrencyStamp = "e98b23f6-6a1c-4f78-925e-f5e81a239eaf",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = "1bf7d6e8-f6ef-4241-8d9b-ee8f9242e652",
-                            ConcurrencyStamp = "ff83eeae-a08b-4463-bd0e-27e239029150",
-                            Name = "Group",
-                            NormalizedName = "GROUP"
-                        },
-                        new
-                        {
-                            Id = "7c28b82c-a74f-4d03-9f76-3b4cba246967",
-                            ConcurrencyStamp = "0248fcbd-b8c0-47d2-a6c2-efa9c10f515f",
-                            Name = "Member",
-                            NormalizedName = "MEMBER"
-                        });
                 });
 
             modelBuilder.Entity("HRA.DAL.Entity.User", b =>
@@ -287,7 +305,7 @@ namespace HRA.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Dob")
+                    b.Property<DateTime?>("Dob")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -463,136 +481,6 @@ namespace HRA.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Videos");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            IsDeleted = false,
-                            ReferenceId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Title = "Sample Video 1",
-                            Url = "https://player.vimeo.com/video/347119375/"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            IsDeleted = false,
-                            ReferenceId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Title = "Sample Video 2",
-                            Url = "https://player.vimeo.com/video/112866269/"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            IsDeleted = false,
-                            ReferenceId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Title = "Sample Video 3",
-                            Url = "https://player.vimeo.com/video/6370469/"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            IsDeleted = false,
-                            ReferenceId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Title = "Sample Video 4",
-                            Url = "https://player.vimeo.com/video/444571537/"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            IsDeleted = false,
-                            ReferenceId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Title = "Sample Video 1",
-                            Url = "https://player.vimeo.com/video/347119375/"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            IsDeleted = false,
-                            ReferenceId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Title = "Sample Video 2",
-                            Url = "https://player.vimeo.com/video/112866269/"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            IsDeleted = false,
-                            ReferenceId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Title = "Sample Video 3",
-                            Url = "https://player.vimeo.com/video/6370469/"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            IsDeleted = false,
-                            ReferenceId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Title = "Sample Video 4",
-                            Url = "https://player.vimeo.com/video/444571537/"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            IsDeleted = false,
-                            ReferenceId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Title = "Sample Video 1",
-                            Url = "https://player.vimeo.com/video/347119375/"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            IsDeleted = false,
-                            ReferenceId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Title = "Sample Video 2",
-                            Url = "https://player.vimeo.com/video/112866269/"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            IsDeleted = false,
-                            ReferenceId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Title = "Sample Video 3",
-                            Url = "https://player.vimeo.com/video/6370469/"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            IsDeleted = false,
-                            ReferenceId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Title = "Sample Video 4",
-                            Url = "https://player.vimeo.com/video/444571537/"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            IsDeleted = false,
-                            ReferenceId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Title = "Sample Video 1",
-                            Url = "https://player.vimeo.com/video/347119375/"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            IsDeleted = false,
-                            ReferenceId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Title = "Sample Video 2",
-                            Url = "https://player.vimeo.com/video/112866269/"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            IsDeleted = false,
-                            ReferenceId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Title = "Sample Video 3",
-                            Url = "https://player.vimeo.com/video/6370469/"
-                        },
-                        new
-                        {
-                            Id = 16,
-                            IsDeleted = false,
-                            ReferenceId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Title = "Sample Video 4",
-                            Url = "https://player.vimeo.com/video/444571537/"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

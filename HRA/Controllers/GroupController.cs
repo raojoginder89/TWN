@@ -24,7 +24,7 @@ namespace HRA.Controllers
         }
 
         [HttpGet("")]
-        //[Authorize(Policy = AccessPolicy.SuperAdminLevel)]
+        [Authorize(Policy = AccessPolicy.SuperAdminLevel)]
         public async Task<IActionResult> GetAllGroups()
         {
             var groups = await _groupService.GetAllGroups();
@@ -41,7 +41,15 @@ namespace HRA.Controllers
             }
 
             var group = await _groupService.GetGroup(referenceId);
-            return Ok(new StringResponse { Value = group.Name });
+            return Ok(new StringResponse { ReferenceId = group.ReferenceId.ToString(), Value = group.Name });
+        }
+
+        [AllowAnonymous]
+        [HttpGet("external/{groupId}/name")]
+        public async Task<IActionResult> GetGroupNameByExternalId(string groupExternalId)
+        {
+            var group = await _groupService.GetGroupByExternalId(groupExternalId);
+            return Ok(new StringResponse { ReferenceId = group.ReferenceId.ToString(), Value = group.Name });
         }
 
         [HttpGet("{groupId}")]

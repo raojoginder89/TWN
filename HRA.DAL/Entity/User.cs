@@ -19,7 +19,7 @@ namespace HRA.DAL.Entity
 
         public string LastName { get; set; }
 
-        public DateTime Dob { get; set; }
+        public DateTime? Dob { get; set; }
 
         [Required]
         [StringLength(300)]

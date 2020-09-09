@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row row mt-5 mb-5">
+    <div class="col-md-12 mt-5 text-center">
+      <h2>Welcome to Think Wellness Now</h2>
+      <span *ngIf='hraFilled'>
+        <h4>You have already filled the Wellness Engagement Questionnaire</h4>
+      </span>
+      <span *ngIf='!hraFilled'>
+        <h4>You haven't filled the Wellness Engagement Questionnaire, Please fill the form</h4>
+        <p>Go to <a style="color:#0366d6;cursor: pointer;" (click)='gotoQuestionnaire()'>Questionnaire Form</a></p>
+      </span>
+    </div>
+  </div>
+</div>

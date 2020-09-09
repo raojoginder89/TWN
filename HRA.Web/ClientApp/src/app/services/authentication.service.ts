@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UserToken } from '../models/UserToken';
 import { getApiUrl } from '../helpers/get-url';
+import { User } from '../models/User';
 
 
 @Injectable({ providedIn: 'root' })
@@ -29,6 +30,16 @@ export class AuthenticationService {
         this.currentUserSubject.next(user);
         return user;
       }));
+  }
+
+  register(user: User) {
+    return this.http.post<any>(getApiUrl('user/register'), user)
+    .pipe(map(userWithToken => {
+      // store user details and jwt token in local storage to keep user logged in between page refreshes
+      localStorage.setItem('currentUser', JSON.stringify(userWithToken));
+      this.currentUserSubject.next(userWithToken);
+      return user;
+    }));
   }
 
   logout() {

@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://thwapi.azurewebsites.net/api/'
+  apiUrl: 'https://twnportalapi.azurewebsites.net/api/'
 };

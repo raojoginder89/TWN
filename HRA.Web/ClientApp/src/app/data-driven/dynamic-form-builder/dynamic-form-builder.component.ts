@@ -4,7 +4,8 @@ import { DynamicControlBase } from '../dynamic-control.base';
 
 @Component({
     selector: 'app-dynamic-form-builder',
-    templateUrl: './dynamic-form-builder.component.html'
+    templateUrl: './dynamic-form-builder.component.html',
+    styleUrls: ['./dynamic-form-builder.component.scss']
 })
 export class DynamicFormBuilderComponent {
     @Input() question: DynamicControlBase<string>;
@@ -15,9 +16,17 @@ export class DynamicFormBuilderComponent {
     }
 
     shouldShowErrors(): boolean {
-        return this.form.controls[this.question.key] &&
-            this.form.controls[this.question.key].errors &&
-            (this.form.controls[this.question.key].dirty || this.form.controls[this.question.key].touched);
+        const control = this.form.controls[this.question.key];
+        const isCOntrol = control instanceof FormControl;
+        const reult = control && isCOntrol && (
+            this.form.controls[this.question.key].errors
+            && (this.form.controls[this.question.key].dirty || this.form.controls[this.question.key].touched));
+        return reult;
+    }
+
+    getSubForm(formKey: string) {
+        const form = this.form.controls[formKey];
+        return form instanceof FormGroup ? form : null;
     }
 
     listOfErrors() {

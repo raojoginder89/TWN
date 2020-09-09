@@ -4,5 +4,7 @@ export class UserToken {
   lastName: string;
   token: string;
   roles: string[];
-  isHRACompled: boolean;
+  groupId: string;
+  ssn: string;
+  isHRACompleted: boolean;
 }

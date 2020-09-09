@@ -16,7 +16,8 @@ namespace HRA.DAL.Convertors
                 UserName = user.UserName,
                 Id = user.Id,
                 Ssn = user.Ssn,
-                IsActive = user.IsActive
+                IsActive = user.IsActive,
+                GroupId = user.GroupId,
             };
         }
 
@@ -33,7 +34,8 @@ namespace HRA.DAL.Convertors
                 Ssn = user.Ssn,
                 CreatedDate = user.CreatedDate,
                 ModifiedDate = user.ModifiedDate,
-                IsActive = user.IsActive
+                IsActive = user.IsActive,
+                GroupId = user.GroupId,
             };
         }
     }

@@ -7,7 +7,7 @@ import { getApiUrl } from '../helpers/get-url';
 export class HRAService {
   constructor(private http: HttpClient) { }
 
-  addHRA(hraDetails: HRADetails) {
-    return this.http.post(getApiUrl(`hra/${hraDetails.groupId}`), hraDetails);
+  addHRA(groupId: string, hraDetails: HRADetails) {
+    return this.http.post(getApiUrl(`hra/${groupId}`), hraDetails);
   }
 }

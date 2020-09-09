@@ -13,8 +13,8 @@ namespace HRA.Contracts
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Required]
-        public DateTime Dob { get; set; }
+        //[Required]
+        public DateTime? Dob { get; set; }
         
         [Required]
         public string Ssn { get; set; }

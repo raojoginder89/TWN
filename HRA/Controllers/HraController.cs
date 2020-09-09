@@ -44,21 +44,13 @@ namespace HRA.Controllers
             var detail = await _hraService.GetHRADetailBySsn(details.Ssn);
             if (detail != null)
             {
-                return BadRequest("HRA Details already filled for this SSN");
+                return BadRequest("Wellness Engagement Questionnaire was already submitted");
             }
 
             var info = await _hraService.AddHRADetails(details.ToModel(group.Id));
-            try
-            {
-                var address = details.ToAddressModel(info.Id);
-                await _addressService.AddAddress(address);
-            }
-            catch (Exception)
-            {
-
-            }
             return Ok();
         }
+
 
         [HttpGet("{groupId}/{ssn}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = AccessPolicy.AdminLevel)]

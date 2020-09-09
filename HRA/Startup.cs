@@ -135,6 +135,7 @@ namespace HRA
             services.AddTransient<IGroupService, GroupService>();
             services.AddTransient<IHRAService, HRAService>();
             services.AddTransient<IAddressService, AddressService>();
+            services.AddTransient<IMemberService, MemberService>();
 
             #endregion
 

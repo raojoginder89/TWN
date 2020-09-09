@@ -7,7 +7,11 @@
       <!-- <span _ngcontent-bxa-c120="" class="login-form-title"> Register </span> -->
       <div>
         <span class="login-form-title"> Register </span>
-
+        <div class="form-error" *ngIf="!!errorMessage && errorMessage.length > 0">
+          <p *ngFor='let message of errorMessage'>
+            {{ message }}
+          </p>
+        </div>
         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
             <label for="name">Name</label>
@@ -15,6 +19,14 @@
               [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
             <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
               <div *ngIf="f.name.errors.required">Name is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ssn">Employee Id</label>
+            <input type="text" formControlName="ssn" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.ssn.errors }" />
+            <div *ngIf="submitted && f.ssn.errors" class="invalid-feedback">
+              <div *ngIf="f.ssn.errors.required">Employee Id is required</div>
             </div>
           </div>
           <div class="form-group">
@@ -35,15 +47,7 @@
               <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
             </div>
           </div>
-          <div class="form-group">
-            <label for="ssn">SSN</label>
-            <input type="text" formControlName="ssn" class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f.ssn.errors }" />
-            <div *ngIf="submitted && f.ssn.errors" class="invalid-feedback">
-              <div *ngIf="f.ssn.errors.required">SSN is required</div>
-            </div>
-          </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="dob">DOB</label>
             <input type="date" formControlName="dob" class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" />
@@ -51,7 +55,7 @@
               {{f.dob.errors}}
               <div *ngIf="f.dob.errors.required">DOB is required</div>
             </div>
-          </div>
+          </div> -->
           <div class="form-group">
             <button [disabled]="loading" class="btn btn-login">
               <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>

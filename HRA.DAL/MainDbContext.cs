@@ -21,6 +21,7 @@ namespace HRA.DAL
 
             builder.Entity<Group>().Property(e => e.ReferenceId).HasDefaultValueSql("NewId()");
             builder.Entity<Videos>().Property(e => e.ReferenceId).HasDefaultValueSql("NewId()");
+            builder.Entity<Member>().Property(e => e.ReferenceId).HasDefaultValueSql("NewId()");
 
             builder.Entity<Group>()
                .HasMany(e => e.HraDetails)
@@ -44,7 +45,7 @@ namespace HRA.DAL
                 property.ValueGenerated = ValueGenerated.OnAdd;
             }
 
-            SeedSampleVideos(builder);
+            //SeedSampleVideos(builder);
         }
 
         public virtual DbSet<Address> Addresses { get; set; }
@@ -56,6 +57,8 @@ namespace HRA.DAL
         public virtual DbSet<UserVideos> UserVideos { get; set; }
 
         public virtual DbSet<Videos> Videos { get; set; }
+
+        public virtual DbSet<Member> Members{ get; set; }
 
         private static void SeedSampleVideos(ModelBuilder builder)
         {

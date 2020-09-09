@@ -17,8 +17,7 @@ namespace HRA.BLL
         {
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
-
-
+        
         public async Task<IEnumerable<Group>> GetAllGroups()
         {
             var groups = _unitOfWork.Query<HRA.DAL.Entity.Group>().Where(x => !x.IsDeleted).ToList();
@@ -28,6 +27,12 @@ namespace HRA.BLL
         public async Task<Group> GetGroup(Guid groupId)
         {
             var group = GetGroupById(groupId);
+            return group.ToModel();
+        }
+
+        public async Task<Group> GetGroupById(int groupId)
+        {
+            var group = _unitOfWork.Query<HRA.DAL.Entity.Group>().FirstOrDefault(x => x.Id == groupId && !x.IsDeleted);
             return group.ToModel();
         }
 
@@ -74,6 +79,12 @@ namespace HRA.BLL
         private HRA.DAL.Entity.Group GetGroupById(Guid groupId)
         {
             return _unitOfWork.Query<HRA.DAL.Entity.Group>().FirstOrDefault(x => x.ReferenceId == groupId && !x.IsDeleted);
+        }
+
+        public async Task<Group> GetGroupByExternalId(string groupExternalId)
+        {
+            var group = _unitOfWork.Query<HRA.DAL.Entity.Group>().FirstOrDefault(x => x.ExternalId == groupExternalId && !x.IsDeleted);
+            return group.ToModel();
         }
     }
 }

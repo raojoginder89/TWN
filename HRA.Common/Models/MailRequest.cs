@@ -7,6 +7,7 @@ namespace HRA.Common.Models
 {
     public class MailRequest
     {
+        public string ToEmailName { get; set; }
         public string ToEmail { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }

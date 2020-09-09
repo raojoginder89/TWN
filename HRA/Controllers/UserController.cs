@@ -15,10 +15,14 @@ namespace HRA.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IGroupService _groupService;
+        private readonly IMemberService _memberService;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IGroupService groupService, IMemberService memberService)
         {
             _userService = userService ?? throw new ArgumentNullException(nameof(userService));
+            _groupService = groupService ?? throw new ArgumentNullException(nameof(groupService));
+            _memberService = memberService ?? throw new ArgumentNullException(nameof(memberService));
         }
 
         [HttpPost("Register")]
@@ -26,25 +30,32 @@ namespace HRA.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _userService.Register(model.ToModel());
+                var member = await _memberService.GetMemberBySsn(model.Ssn);
+                if (member == null)
+                {
+                    return BadRequest("Invalid Employee Id");
+                }
+                var user = model.ToModel();
+                user.GroupId = member.GroupId;
+                var result = await _userService.Register(user);
                 if (result.IsError)
                 {
                     return BadRequest(result.Messages);
                 }
 
-                return Ok();
+                return Ok(result.Item.ToContract());
             }
 
             return BadRequest(ModelState.Values);
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Register(Login model)
+        public async Task<IActionResult> Login(Login model)
         {
             var userWithToken = await _userService.Login(model.UserName, model.Password);
             if (userWithToken == null || string.IsNullOrWhiteSpace(userWithToken.Token))
             {
-                return BadRequest("Invalid UserName or Password");
+                return BadRequest("Invalid Username or Password");
             }
 
             return Ok(userWithToken.ToContract());

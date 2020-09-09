@@ -9,9 +9,13 @@
         public string LastName { get; set; }
 
         public string Token { get; set; }
-        
+
         public string[] Roles { get; set; }
 
-        public bool IsHRACompled { get; set; }
+        public string GroupId { get; set; }
+
+        public string Ssn { get; set; }
+
+        public bool IsHRACompleted { get; set; }
     }
 }

@@ -1,0 +1,33 @@
+@import "../../shared/styles/base/settings";
+
+.form-control {
+    border-radius: 0% !important;
+}
+
+.section {
+    font-weight: bold !important;
+}
+
+.sub-section {
+    font-weight: 600 !important;
+    margin-bottom: 0 !important;
+}
+
+label {
+    margin-right: 0.5rem !important;
+}
+
+.form-check-inline .form-check-input {
+    margin-top: 4px !important;
+}
+
+.text-right.is-invalid {
+    .invalid-feedback {
+        color:green;
+      li {
+        right: 35px;
+        top: 25px;
+      }
+    }
+  }
+  

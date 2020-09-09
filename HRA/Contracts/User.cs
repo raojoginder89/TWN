@@ -14,7 +14,7 @@ namespace HRA.Contracts
 
         public bool IsActive { get; set; }
 
-        public DateTime Dob { get; set; }
+        public DateTime? Dob { get; set; }
 
         public string Gender { get; set; }
 

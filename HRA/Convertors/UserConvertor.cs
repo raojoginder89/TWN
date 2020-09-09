@@ -59,7 +59,9 @@ namespace HRA.Convertors
                 LastName = model.LastName,
                 Token = model.Token,
                 Roles = model.Roles,
-                IsHRACompled = model.IsHRACompled
+                GroupId = model.GroupId,
+                Ssn = model.Ssn,
+                IsHRACompleted = model.IsHRACompleted
             };
         }
     }

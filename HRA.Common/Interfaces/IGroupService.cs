@@ -11,10 +11,13 @@ namespace HRA.Common.Interfaces
         
         Task<Group> GetGroup(Guid groupId);
 
+        Task<Group> GetGroupById(int groupId);
+
         Task<Group> AddGroup(Group groupInfo);
 
         Task<Group> UpdateGroup(Guid groupId, Group groupInfo);
 
         Task DeleteGroup(Guid groupId);
+        Task<Group> GetGroupByExternalId(string groupExternalId);
     }
 }

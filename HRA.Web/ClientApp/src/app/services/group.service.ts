@@ -18,7 +18,7 @@ export class GroupService {
   }
 
   getGroupName(groupReferenceId: string): Observable<StringResponse> {
-    return this.http.get<StringResponse>(getApiUrl(`groups/${groupReferenceId}/name`));
+    return this.http.get<StringResponse>(getApiUrl(`groups/extenal/${groupReferenceId}/name`));
   }
 
   addGroup(group: Group): Observable<Group> {

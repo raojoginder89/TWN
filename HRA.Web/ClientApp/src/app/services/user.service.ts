@@ -8,10 +8,6 @@ import { getApiUrl } from '../helpers/get-url';
 export class UserService {
   constructor(private http: HttpClient) { }
 
-  register(user: User) {
-    return this.http.post(getApiUrl('user/register'), user);
-  }
-
   getUserDetails(): Observable<User> {
     return this.http.get<User>(getApiUrl('user'));
   }

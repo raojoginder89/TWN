@@ -12,15 +12,19 @@ import { AdminAuthGuard } from './helpers/auth-admin.gaurd';
 import { UpdateGroupComponent } from './controls/groups/update-group/update-group.component';
 import { UpdateVideoComponent } from './controls/videos/update-video/update-video.component';
 import { VideoListComponent } from './controls/videos/video-list/video-list.component';
+import { ThankYouComponent } from './controls/ThankYou/thankyou.component';
+import { WelcomeComponent } from './controls/welcome/welcome.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard], pathMatch: 'full' },
+  { path: '', component: WelcomeComponent, canActivate: [AuthGuard], pathMatch: 'full' },
+  { path: 'home', component: WelcomeComponent, canActivate: [AuthGuard], pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'change-password', component: ChangePasswordComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password/:token', component: ResetPasswordComponent },
   { path: ':groupId/hra-form', component: HRAFormComponent },
+  { path: 'hra-form/thankyou', component: ThankYouComponent },
   { path: 'groups', component: GroupListComponent , canActivate: [AdminAuthGuard]},
   { path: 'groups/:groupId', component: UpdateGroupComponent , canActivate: [AdminAuthGuard]},
   { path: 'videos', component: VideoListComponent , canActivate: [AdminAuthGuard]},

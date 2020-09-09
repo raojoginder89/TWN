@@ -26,19 +26,23 @@ namespace HRA.BLL
         private readonly AppSettings _appSettings;
         private readonly UserManager<User> _userManager;
         private readonly IEmailService _emailService;
+        private readonly IHRAService _hraService;
+        private readonly IGroupService _groupService;
 
-        public UserService(UserManager<User> userManager, IEmailService emailService, IOptionsSnapshot<AppSettings> appSettings)
+        public UserService(UserManager<User> userManager, IEmailService emailService, IOptionsSnapshot<AppSettings> appSettings, IHRAService hraService, IGroupService groupService)
         {
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             _emailService = emailService ?? throw new ArgumentNullException(nameof(emailService));
             _appSettings = appSettings?.Value ?? throw new ArgumentNullException(nameof(appSettings));
+            _hraService = hraService ?? throw new ArgumentNullException(nameof(hraService));
+            _groupService = groupService ?? throw new ArgumentNullException(nameof(groupService));
         }
 
-        public async Task<ResultMessage<string>> Register(Common.Models.User user)
+        public async Task<ResultMessage<UserToken>> Register(Common.Models.User user)
         {
             var userEntity = user.ToEntity();
 
-            var result = new ResultMessage<string>();
+            var result = new ResultMessage<UserToken>();
             var identityResult = await _userManager.CreateAsync(userEntity, user.Password);
             if (!identityResult.Succeeded)
             {
@@ -50,7 +54,17 @@ namespace HRA.BLL
             identityResult = await _userManager.AddToRoleAsync(userEntity, RoleType.Member.ToString());
             if (identityResult.Succeeded)
             {
-                result.Item = GetUserAccessToken(userEntity.UserName, userEntity.Id, new List<string> { user.RoleType.ToString() });
+                result.Item = new UserToken
+                {
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    UserName = user.UserName,
+                    Ssn = user.Ssn,
+                    GroupId = _groupService.GetGroupById(user.GroupId).Result?.ExternalId,
+                    Roles = new[] { RoleType.Member.ToString() },
+                    Token = GetUserAccessToken(userEntity.UserName, userEntity.Id, new[] { RoleType.Member.ToString() }),
+                    IsHRACompleted = _hraService.GetHRADetailBySsn(user.Ssn).Result != null
+                };
             }
             else
             {
@@ -82,7 +96,10 @@ namespace HRA.BLL
                 LastName = user.LastName,
                 UserName = user.UserName,
                 Roles = roles.ToArray(),
-                Token = GetUserAccessToken(user.UserName, user.Id, roles)
+                Ssn = user.Ssn,
+                GroupId = _groupService.GetGroupById(user.GroupId).Result?.ExternalId,
+                Token = GetUserAccessToken(user.UserName, user.Id, roles),
+                IsHRACompleted = _hraService.GetHRADetailBySsn(user.Ssn).Result != null
             };
         }
 
@@ -105,8 +122,8 @@ namespace HRA.BLL
             }
 
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-            var url = new Uri($"http://localhost:4401/reset-password/{HttpUtility.UrlEncode(token)}"); 
-            await _emailService.SendEmail(new MailRequest { Body = token, Subject = "Reset Password", ToEmail = user.Email });
+            var url = new Uri($"{_appSettings?.UIBaseUrl}/reset-password/{HttpUtility.UrlEncode(token)}"); 
+            await _emailService.SendEmail(new MailRequest { Body = url.AbsoluteUri.ToString(), Subject = "Reset Password", ToEmail = user.Email });
             result.Item = true;
             return result;
         }
@@ -176,5 +193,6 @@ namespace HRA.BLL
         {
             return identityResult.Errors.Select(error => new Message(error.Code, error.Description)).ToList();
         }
+
     }
 }
